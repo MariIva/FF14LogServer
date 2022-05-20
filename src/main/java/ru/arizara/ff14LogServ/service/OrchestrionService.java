@@ -1,15 +1,15 @@
 package ru.arizara.ff14LogServ.service;
 
-import ru.arizara.ff14LogServ.entities.Orchestrion;
+import ru.arizara.ff14LogServ.entities.Orchestration;
 
 import java.util.List;
 
 public interface OrchestrionService {
 
-    Orchestrion insert(Orchestrion orchestrion);
+    Orchestration insert(Orchestration orchestrion);
 
-    public List<Orchestrion> getAll();
+    public List<Orchestration> getAll();
 
-    public List<Orchestrion> getByPatch(String patch);
+    public List<Orchestration> getByPatch(String patch);
 
 }

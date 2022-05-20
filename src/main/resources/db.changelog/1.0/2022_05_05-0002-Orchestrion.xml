@@ -36,6 +36,10 @@
                 <constraints nullable="false"/>
             </column>
 
+            <column name="icon" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+
           <!--  <column name="item_id"
                     type="NUMERIC(19,0)">
                 <constraints nullable="true"/>
@@ -46,10 +50,6 @@
             </column>
 
             <column name="number" type="VARCHAR(5)">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="icon" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>-->
 

@@ -4,8 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.arizara.ff14LogServ.dao.CategoryLogDAO;
 import ru.arizara.ff14LogServ.dao.OrchestrionDAO;
-import ru.arizara.ff14LogServ.entities.CategoryLog;
-import ru.arizara.ff14LogServ.entities.Orchestrion;
+import ru.arizara.ff14LogServ.entities.Orchestration;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -19,7 +18,7 @@ public class OrchestrionServiceIMPL implements OrchestrionService{
 
     @Override
     //@Transactional
-    public Orchestrion insert(Orchestrion orchestrion) {
+    public Orchestration insert(Orchestration orchestrion) {
 
         try {
             categoryLogDAO.findById(orchestrion.getCategory().getId()).get();
@@ -31,13 +30,13 @@ public class OrchestrionServiceIMPL implements OrchestrionService{
     }
 
     @Override
-    public List<Orchestrion> getAll() {
+    public List<Orchestration> getAll() {
 
         return orchestrionDAO.findAll();
     }
 
     @Override
-    public List<Orchestrion> getByPatch(String patch) {
+    public List<Orchestration> getByPatch(String patch) {
         return orchestrionDAO.findByPatch(patch);
     }
 

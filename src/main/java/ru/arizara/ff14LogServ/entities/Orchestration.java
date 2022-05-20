@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Table(name = "orchestrion")
-public class Orchestrion {
+public class Orchestration {
 
     @Id
     private int id;
@@ -30,5 +30,8 @@ public class Orchestrion {
     @ManyToOne(targetEntity = CategoryLog.class)
     @JoinColumn(name = "category")
     private CategoryLog category;
+
+    @Column(name = "icon")
+    private String icon;
 
 }

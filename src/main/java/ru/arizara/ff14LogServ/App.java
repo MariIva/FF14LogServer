@@ -7,11 +7,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.io.Resource;
-import ru.arizara.ff14LogServ.entities.Orchestrion;
+import ru.arizara.ff14LogServ.entities.Orchestration;
 import ru.arizara.ff14LogServ.mapper.OrchestrionMapper;
 import ru.arizara.ff14LogServ.service.DBServiceIMPL;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.List;
@@ -25,17 +27,23 @@ public class App {
         ConfigurableApplicationContext context = SpringApplication.run(App.class, args);
 
         JSONArray json = getJsonFromResource(context);
-        List<Orchestrion> list = OrchestrionMapper.orchestrionFromJSONArray(json);
+        List<Orchestration> list = OrchestrionMapper.orchestrionFromJSONArray(json);
 
         DBServiceIMPL dbServiceIMPL = context.getBean(DBServiceIMPL.class);
         dbServiceIMPL.setOrchestrion(list);
 
+        try {
+            dbServiceIMPL.setImages();
+        } catch (IOException e) {
+            System.out.println(e.toString());
+        }
 
-       /* try {
-            Console.main(args);
+
+       try {
+           Console.main(args);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }*/
+        }
     }
 
     // чтение json из файла

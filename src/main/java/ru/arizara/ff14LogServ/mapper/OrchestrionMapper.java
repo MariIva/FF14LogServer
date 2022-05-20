@@ -3,15 +3,15 @@ package ru.arizara.ff14LogServ.mapper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import ru.arizara.ff14LogServ.entities.Orchestrion;
+import ru.arizara.ff14LogServ.entities.Orchestration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrchestrionMapper {
-    public static Orchestrion orchestrionFromJSON(JSONObject jsonObject) {
+    public static Orchestration orchestrionFromJSON(JSONObject jsonObject) {
 
-        Orchestrion orchestrion = null;
+        Orchestration orchestrion = null;
         Integer item_id = null;
         try {
             item_id = jsonObject.getInt("item_id");
@@ -19,7 +19,7 @@ public class OrchestrionMapper {
         }
 
         try {
-            orchestrion = new Orchestrion(
+            orchestrion = new Orchestration(
                     jsonObject.getInt("id"),
                     jsonObject.getString("name"),
                     jsonObject.getString("description"),
@@ -28,7 +28,8 @@ public class OrchestrionMapper {
                     jsonObject.getString("owned"),
                     jsonObject.getString("number"),
                     jsonObject.getString("icon"),*/
-                    CategoryLogMapper.CategoryLogFromJSON(jsonObject.getJSONObject("category"))
+                    CategoryLogMapper.CategoryLogFromJSON(jsonObject.getJSONObject("category")),
+                    jsonObject.getString("icon")
             );
         } catch (JSONException e) {
             e.printStackTrace();
@@ -37,10 +38,10 @@ public class OrchestrionMapper {
         return orchestrion;
     }
 
-    public static List<Orchestrion> orchestrionFromJSONArray(JSONArray array) {
-        List<Orchestrion> list = new ArrayList<>();
+    public static List<Orchestration> orchestrionFromJSONArray(JSONArray array) {
+        List<Orchestration> list = new ArrayList<>();
         for (int i=0; i<array.length(); i++) {
-            Orchestrion orchestrion = null;
+            Orchestration orchestrion = null;
             try {
                 JSONObject jsonObject = array.getJSONObject(i);
                 orchestrion = OrchestrionMapper.orchestrionFromJSON(jsonObject);

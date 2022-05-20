@@ -10,6 +10,7 @@
     <include file="db.changelog/1.0/2022_05_05-0001-CategoryLog.xml"/>
     <include file="db.changelog/1.0/2022_05_05-0002-Orchestrion.xml"/>
 
+    <include file="db.changelog/data/2022_05_20-0001-CategoryLog-data.xml"/>
 
 
     </databaseChangeLog>

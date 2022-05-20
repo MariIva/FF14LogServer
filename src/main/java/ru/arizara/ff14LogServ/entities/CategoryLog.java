@@ -21,4 +21,12 @@ public class CategoryLog {
     @Column(name = "name")
     private String name;
 
+
+    @Column(name = "icon")
+    private String icon;
+
+    public CategoryLog(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
