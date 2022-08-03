@@ -9,6 +9,8 @@
     <!--<includeAll path="db.changelog/1.0"/>-->
     <include file="db.changelog/1.0/2022_05_05-0001-CategoryLog.xml"/>
     <include file="db.changelog/1.0/2022_05_05-0002-Orchestrion.xml"/>
+    <include file="db.changelog/1.0/2022_08_06-0004-Mount.xml"/>
+    <include file="db.changelog/1.0/2022_08_06-0003-Source.xml"/>
 
     <include file="db.changelog/data/2022_05_20-0001-CategoryLog-data.xml"/>
 

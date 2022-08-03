@@ -3,7 +3,7 @@ package ru.arizara.ff14LogServ.rest.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.arizara.ff14LogServ.rest.dto.CategoryLogDTO;
-import ru.arizara.ff14LogServ.service.CategoryLogService;
+import ru.arizara.ff14LogServ.service.interfaces.CategoryLogService;
 
 import java.util.List;
 import java.util.stream.Collectors;

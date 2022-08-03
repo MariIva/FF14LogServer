@@ -3,7 +3,7 @@ package ru.arizara.ff14LogServ.rest.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.arizara.ff14LogServ.rest.dto.OrchestrionDTO;
-import ru.arizara.ff14LogServ.service.OrchestrionService;
+import ru.arizara.ff14LogServ.service.interfaces.OrchestrionService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +25,7 @@ public class OrchestrionController {
     }
 
 
-   @RequestMapping(value = "orchestrion", params = {"patch"})
+   /*@RequestMapping(value = "orchestrion", params = {"patch"})
     public List<OrchestrionDTO> getOrchestrionByAddon(@RequestParam String patch) {
 
        System.out.println("getOrchestrionByAddon");
@@ -34,5 +34,5 @@ public class OrchestrionController {
                 .stream()
                 .map(OrchestrionDTO::toDTO)
                 .collect(Collectors.toList());
-    }
+    }*/
 }

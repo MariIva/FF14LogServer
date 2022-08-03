@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="2022_08_06-0005-Mount_Source" author="ivkina">
+
+        <!-- Проверяем нет ли уже таблицы с таким названием -->
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="mount_source"/>
+            </not>
+        </preConditions>
+
+        <!-- Создаем таблицу -->
+        <createTable tableName="mount_source">
+
+            <!-- Описываем колонки -->
+            <column name="id"
+                    type="NUMERIC(19,0)"
+                    autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="idMount" type="NUMERIC(19,0)">
+                <constraints nullable="false" foreignKeyName="fk_mount_m_c"
+                             references="mount(id)" deleteCascade="false"/>
+            </column>
+            <column name="idSource" type="NUMERIC(19,0)">
+                <constraints nullable="false" foreignKeyName="fk_source_m_c"
+                             references="source(id)" deleteCascade="false"/>
+            </column>
+
+
+           <!-- <column name="category" type="NUMERIC(19,0)">
+                <constraints nullable="false" foreignKeyName="fk_orchestrion_categoryLog"
+                             references="category_Log(id)" deleteCascade="false"/>
+            </column>-->
+        </createTable>
+
+    </changeSet>
+
+
+</databaseChangeLog>
