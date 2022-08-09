@@ -22,7 +22,7 @@ public class ImageController {
     public ResponseEntity<byte[]> setImageOneDir(@PathVariable("dir") String dir,
                                                  @PathVariable("img") String img) throws IOException {
 
-        var imgFile = new ClassPathResource("image/"+"dir"+"/"+img+".png");
+        var imgFile = new ClassPathResource("image/"+dir+"/"+img+".png");
         byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
 
         return ResponseEntity
@@ -37,7 +37,7 @@ public class ImageController {
                                                  @PathVariable("dir2") String dir2,
                                                  @PathVariable("img") String img) throws IOException {
 
-        var imgFile = new ClassPathResource("image/"+"di1"+"/"+dir2+"/"+img+".png");
+        var imgFile = new ClassPathResource("image/"+di1+"/"+dir2+"/"+img+".png");
         byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
 
         return ResponseEntity

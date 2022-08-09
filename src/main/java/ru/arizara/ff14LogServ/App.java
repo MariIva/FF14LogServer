@@ -6,10 +6,10 @@ import org.json.JSONTokener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import ru.arizara.ff14LogServ.entities.Mount;
-import ru.arizara.ff14LogServ.entities.Orchestration;
-import ru.arizara.ff14LogServ.entities.Source;
-import ru.arizara.ff14LogServ.mapper.MountSourceMapper;
+import ru.arizara.ff14LogServ.entities.*;
+import ru.arizara.ff14LogServ.mapper.BlueMageMapper;
+import ru.arizara.ff14LogServ.mapper.MinionMapper;
+import ru.arizara.ff14LogServ.mapper.MountMapper;
 import ru.arizara.ff14LogServ.mapper.OrchestrionMapper;
 import ru.arizara.ff14LogServ.service.classes.DBServiceIMPL;
 
@@ -23,20 +23,35 @@ import java.util.*;
 @SpringBootApplication
 public class App {
 
-    //public static final String FILE_NAME = "src/main/resources/db.changelog/data/json/2022_05_05-0002-Orchestrion_CategoryLog.json";
+    public static final String RATH_JSON = "E:\\JavaProject\\IJSpring\\FF14LogServer\\src\\main\\resources\\db.changelog\\data\\json";
+    public static final String RATH_IMAGE ="E:\\JavaProject\\IJSpring\\FF14LogServer\\src\\main\\resources\\image";
+    public static final String DATA = "2022_08_14";
+    public static final String ORCH_CAT = "Orchestrion_CategoryLog";
+    public static final String MOUNT = "Mount";
+    public static final String MINION = "Minion";
+    public static final String BLUE_MAGE = "Blue_mag";
 
-    public static final String RATH = "E:\\JavaProject\\IJSpring\\FF14LogServer\\src\\main\\resources\\db.changelog\\data\\json";
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(App.class, args);
 
-        JSONArray jsonOrchestrion = getJsonFromResource(RATH+"\\2022_05_05-0002-Orchestrion_CategoryLog.json");
+        JSONArray jsonOrchestrion = getJsonFromResource(RATH_JSON +"\\"+DATA+"\\"+ORCH_CAT+".json");
         List<Orchestration> orchestrationList = OrchestrionMapper.orchestrionFromJSONArray(jsonOrchestrion);
 
-        JSONArray jsonMount = getJsonFromResource(RATH+"\\2022_08_06-0004-Mounts.json");
+        JSONArray jsonMount = getJsonFromResource(RATH_JSON +"\\"+DATA+"\\"+ MOUNT +".json");
         List<Mount> mountList = new ArrayList<>();
         List<Source> sourseList = new ArrayList<>();
-        MountSourceMapper.SMFromJSONArray(jsonMount, mountList, sourseList);
+        MountMapper.SMFromJSONArray(jsonMount, mountList, sourseList);
+
+
+        JSONArray jsonBLM = getJsonFromResource(RATH_JSON +"\\"+DATA+"\\"+ BLUE_MAGE +".json");
+        List<BlueMage> blueMages = new ArrayList<>();
+        BlueMageMapper.SBMFromJSONArray(jsonBLM, blueMages, sourseList);
+
+
+        JSONArray jsonMinion = getJsonFromResource(RATH_JSON +"\\"+DATA+"\\"+ MINION +".json");
+        List<Minion> minionList = new ArrayList<>();
+        MinionMapper.SMinFromJSONArray(jsonMinion, minionList, sourseList);
 
 
 
@@ -44,6 +59,8 @@ public class App {
         try {
             dbServiceIMPL.setOrchestrion(orchestrationList);
             dbServiceIMPL.setMount(mountList);
+            dbServiceIMPL.setBlueMage(blueMages);
+            dbServiceIMPL.setMinion(minionList);
         } catch (IOException e) {
             System.out.println(e.toString());
         }
@@ -63,8 +80,7 @@ public class App {
         InputStream is = null;
         try {
             //File initialFile = resource.getFile();//todo
-            //String str = "E:\\FF14\\FF14LogServer-master\\src\\main\\resources\\db.changelog\\data\\json\\2022_05_05-0002-Orchestrion_CategoryLog.json";
-            //String str = "db.changelog/data/json/2022_05_05-0002-Orchestrion_CategoryLog.json";
+
             File initialFile = new File(fileName);
             is = Files.newInputStream(initialFile.toPath());
         } catch (IOException e) {

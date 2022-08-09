@@ -12,6 +12,13 @@
     <include file="db.changelog/1.0/2022_08_06-0004-Mount.xml"/>
     <include file="db.changelog/1.0/2022_08_06-0003-Source.xml"/>
     <include file="db.changelog/1.0/2022_08_06-0005-Mount_Source.xml"/>
+    <include file="db.changelog/1.0/2022_18_08-0006-BlueMage.xml"/>
+    <include file="db.changelog/1.0/2022_18_08-0007-BLM_Source.xml"/>
+    <include file="db.changelog/1.0/2022_18_08-0008-Race.xml"/>
+    <include file="db.changelog/1.0/2022_19_08-0011-Skill.xml"/>
+    <include file="db.changelog/1.0/2022_19_08-0012-Statistics.xml"/>
+    <include file="db.changelog/1.0/2022_18_08-0009-Minion.xml"/>
+    <include file="db.changelog/1.0/2022_19_08-0010-Minion_Source.xml"/>
 
     <include file="db.changelog/data/2022_05_20-0001-CategoryLog-data.xml"/>
 

@@ -2,14 +2,9 @@ package ru.arizara.ff14LogServ.service.classes;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.arizara.ff14LogServ.entities.Mount;
-import ru.arizara.ff14LogServ.entities.Orchestration;
-import ru.arizara.ff14LogServ.entities.Source;
+import ru.arizara.ff14LogServ.entities.*;
 import ru.arizara.ff14LogServ.rest.controller.ImageController;
-import ru.arizara.ff14LogServ.service.interfaces.DBService;
-import ru.arizara.ff14LogServ.service.interfaces.MountService;
-import ru.arizara.ff14LogServ.service.interfaces.OrchestrionService;
-import ru.arizara.ff14LogServ.service.interfaces.SourceService;
+import ru.arizara.ff14LogServ.service.interfaces.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,13 +17,15 @@ public class DBServiceIMPL implements DBService {
     private final MountService mountService;
     private final SourceService sourceService;
     private final ImageController imageController;
+    private final BlueMageService blueMageService;
+    private final MinionService minionService;
 
     @Override
     public void setOrchestrion(List<Orchestration> list) throws IOException  {
         for (Orchestration orchestrion : list) {
             orchestrionService.insert(orchestrion);
         }
-        setImagesOrch();
+        setImagesCategoryLog();
     }
 
     @Override
@@ -36,7 +33,6 @@ public class DBServiceIMPL implements DBService {
         for (Mount mount : list) {
             mountService.insert(mount);
             setImagesMount(mount.getId());
-            //TODO load source icons
         }
     }
 
@@ -45,9 +41,27 @@ public class DBServiceIMPL implements DBService {
         for (Source source : list) {
             sourceService.insert(source);
         }
+        //TODO load source icons
     }
 
-    public void setImagesOrch() throws IOException {
+    @Override
+    public void setBlueMage(List<BlueMage> list) throws IOException {
+        for (BlueMage blueMage : list) {
+            blueMageService.insert(blueMage);
+            setImagesBLM(blueMage.getId());
+        }
+    }
+
+    @Override
+    public void setMinion(List<Minion> list) throws IOException {
+        for (Minion minion : list) {
+            minionService.insert(minion);
+            setImagesMinion(minion.getId());
+        }
+        setImagesRace();
+    }
+
+    public void setImagesCategoryLog() throws IOException {
         imageController.setImageOneDir("orchestrion", "ambient");
         imageController.setImageOneDir("orchestrion", "dangeons");
         imageController.setImageOneDir("orchestrion", "locales1");
@@ -63,6 +77,19 @@ public class DBServiceIMPL implements DBService {
     public void setImagesMount(int id) throws IOException {
         imageController.setImageTwoDir("mount", "large", ""+id);
         imageController.setImageTwoDir("mount","small", ""+id);
+    }
+    public void setImagesBLM(int id) throws IOException {
+        imageController.setImageOneDir("blue_mage",  ""+id);
+    }
+    public void setImagesMinion(int id) throws IOException {
+        imageController.setImageTwoDir("minion", "large", ""+id);
+        imageController.setImageTwoDir("minion","small", ""+id);
+    }
+
+    @Override
+    public void setImagesRace() throws IOException { //TODO
+        //imageController.setImageOneDir("minion/race", "");
+
     }
 
 }

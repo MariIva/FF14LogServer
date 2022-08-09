@@ -35,7 +35,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="text" type="VARCHAR(100)">
+            <column name="text" type="VARCHAR(150)">
                 <constraints nullable="false"/>
             </column>
 

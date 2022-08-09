@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="2022_19_08-0012-Statistics.xml" author="ivkina">
+
+        <!-- Проверяем нет ли уже таблицы с таким названием -->
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="stats"/>
+            </not>
+        </preConditions>
+
+        <!-- Создаем таблицу -->
+        <createTable tableName="stats">
+
+            <!-- Описываем колонки -->
+            <column name="id"
+                    type="NUMERIC(19,0)"
+                    autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+
+            <column name="cost" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="attack" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="defense" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="hp" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="speed" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="area_attack" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="eye" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="gate" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="shield" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+
+        </createTable>
+
+    </changeSet>
+
+
+</databaseChangeLog>

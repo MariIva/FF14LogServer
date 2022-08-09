@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="2022_18_08-0008-Minion" author="ivkina">
+
+        <!-- Проверяем нет ли уже таблицы с таким названием -->
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="minion"/>
+            </not>
+        </preConditions>
+
+        <!-- Создаем таблицу -->
+        <createTable tableName="minion">
+
+            <!-- Описываем колонки -->
+            <column name="id"
+                    type="NUMERIC(19,0)"
+                    autoIncrement="false">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="description" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="enhanced_description" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="patch" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="behavior" type="VARCHAR(15)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="tradeable" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+
+             <column name="race_id" type="NUMERIC(19,0)">
+                <constraints nullable="false" foreignKeyName="fk_minion_race"
+                             references="race(id)" deleteCascade="false"/>
+            </column>
+
+            <column name="skill_id" type="NUMERIC(19,0)">
+                <constraints nullable="false" foreignKeyName="fk_minion_skill"
+                             references="skill(id)" deleteCascade="false"/>
+            </column>
+
+            <column name="stats_id" type="NUMERIC(19,0)">
+                <constraints nullable="false" foreignKeyName="fk_minion_stats"
+                             references="stats(id)" deleteCascade="false"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+
+</databaseChangeLog>
