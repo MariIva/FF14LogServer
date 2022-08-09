@@ -20,15 +20,15 @@
             <!-- Описываем колонки -->
             <column name="id"
                     type="NUMERIC(19,0)"
-                    autoIncrement="false">
+                    autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="idMount" type="NUMERIC(19,0)">
+            <column name="mount_id" type="NUMERIC(19,0)">
                 <constraints nullable="false" foreignKeyName="fk_mount_m_c"
                              references="mount(id)" deleteCascade="false"/>
             </column>
-            <column name="idSource" type="NUMERIC(19,0)">
+            <column name="source_id" type="NUMERIC(19,0)">
                 <constraints nullable="false" foreignKeyName="fk_source_m_c"
                              references="source(id)" deleteCascade="false"/>
             </column>

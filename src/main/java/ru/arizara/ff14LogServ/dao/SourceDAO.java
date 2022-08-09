@@ -9,10 +9,10 @@ import ru.arizara.ff14LogServ.entities.Source;
 import java.util.List;
 
 public interface SourceDAO extends JpaRepository<Source, Integer> {
-    /*@Query(value =
+    @Query(value =
             "SELECT * " +
-            "FROM source" +
-            "WHERE source.text LIKE ?1",
+            "FROM source " +
+            "WHERE source.type LIKE ?1 AND source.text LIKE ?2  ",
             nativeQuery = true)
-    Mount findByText(@Param("text") String text);*/
+    List<Source> findByTypeAndText(@Param("type") String type, @Param("text") String text);
 }

@@ -26,7 +26,6 @@ public class MountDTO {
     private String movement;
     private String patch;
     private String bgm;
-   //private List<Source> sources;
 
     public static MountDTO toDTO(Mount mount){
         return new MountDTO(
@@ -39,7 +38,6 @@ public class MountDTO {
                 mount.getMovement(),
                 mount.getPatch(),
                 mount.getBgm()
-                //mount.getSources()
         );
     }
 
@@ -53,9 +51,7 @@ public class MountDTO {
                 mountDTO.getSeats(),
                 mountDTO.getMovement(),
                 mountDTO.getPatch(),
-                mountDTO.getBgm(),
-                null
-                //mountDTO.getSources()
+                mountDTO.getBgm()
         );
     }
 }

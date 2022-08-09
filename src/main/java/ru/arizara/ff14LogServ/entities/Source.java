@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Data //get, set, toString
 @NoArgsConstructor
@@ -14,34 +16,48 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "source")
-public class Source {
+public class Source implements Comparable<Source>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @Column(name = "type")
     private String type;
-
     @Column(name = "text")
     private String text;
 
-    @Column(name = "icon")
-    private String icon;
+    @ManyToMany( mappedBy = "sources")
+    private List<Mount> mounts = new ArrayList<>();
 
-    //@ManyToOne(targetEntity = Mount.class)
-    //@JoinColumn(name = "mount_id")
-    /*@Column(name = "id_mount_")
-    private int idMount;*/
-
-   /* public Source(String type, String text) {
+    public Source(String type, String text) {
         this.type = type;
         this.text = text;
-    }*/
+    }
 
-    public Source(String type, String text/*, int idMount*/) {
+    public Source(int id, String type, String text) {
+        this.id = id;
         this.type = type;
         this.text = text;
-        //this.idMount = idMount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Source source = (Source) o;
+        return type.equals(source.type) && text.equals(source.text);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, text);
+    }
+
+    @Override
+    public int compareTo(Source o) {
+        if (!type.equals(o.type))
+            return type.compareTo(o.type);
+        else
+            return text.compareTo(o.text);
     }
 }

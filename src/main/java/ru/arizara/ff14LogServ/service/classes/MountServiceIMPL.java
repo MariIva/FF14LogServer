@@ -1,6 +1,8 @@
 package ru.arizara.ff14LogServ.service.classes;
 
 import lombok.RequiredArgsConstructor;
+import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import ru.arizara.ff14LogServ.dao.MountDAO;
 import ru.arizara.ff14LogServ.dao.SourceDAO;
@@ -21,15 +23,20 @@ public class MountServiceIMPL implements MountService {
     @Override
     public Mount insert(Mount mount) {
 
-        /*for (Source source : mount.getSources()) {
+        for (Source source : mount.getSources()) {
             try {
-                sourceDAO.findByText(source.getText());
+               List<Source> s = sourceDAO.findByTypeAndText(source.getType(), source.getText());
+               if(s.size()>0)
+                   source.setId(s.get(0).getId());
+               else
+                   sourceDAO.save(source);
             } catch (NoSuchElementException e) {
-                sourceDAO.save(source);
             }
-        }*/
+        }
 
-        return mountDAO.save(mount);
+        Mount m = null;
+        m = mountDAO.save(mount);
+        return m;
     }
 
     @Override

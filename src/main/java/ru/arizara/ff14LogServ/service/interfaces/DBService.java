@@ -6,6 +6,7 @@ import ru.arizara.ff14LogServ.entities.Source;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 public interface DBService {
 
